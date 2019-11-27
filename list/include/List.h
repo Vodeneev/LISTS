@@ -44,12 +44,17 @@ public:
 		return i;
 	}
 	void Delete(Node* i) {
-		Node* k = head;
-		while (i != k->next) {
-			k = k->next;
+		if (i == head) {
+			head = head->next;
 		}
-		k->next = i->next;
-		delete i;
+		else {
+			Node* k = head;
+			while (i != k->next) {
+				k = k->next;
+			}
+			k->next = i->next;
+		}
+		size--;
 	}
 	int& Getelem(Node* i) { // без ссылки вернется копия
 		return i->data;
