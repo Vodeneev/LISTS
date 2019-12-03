@@ -8,21 +8,35 @@ class List
 	int size;
 public:
 	List(int n) {
-		head = new Node; // выделяется память под один квадратик
+		head = new Node; // ГўГ»Г¤ГҐГ«ГїГҐГІГ±Гї ГЇГ Г¬ГїГІГј ГЇГ®Г¤ Г®Г¤ГЁГ­ ГЄГўГ Г¤Г°Г ГІГЁГЄ
 		size = n;
-		Node* tmp = head; // создаем квадратик как хеад
+		Node* tmp = head; // Г±Г®Г§Г¤Г ГҐГ¬ ГЄГўГ Г¤Г°Г ГІГЁГЄ ГЄГ ГЄ ГµГҐГ Г¤
 		for (int i = 0; i < n; i++) {
-			Node* tmp2 = new Node; // создаем какой-то квадратик
-			tmp->next = tmp2; // связали два квадрата
-			tmp = tmp2; // перешли на tmp2
+			Node* tmp2 = new Node; // Г±Г®Г§Г¤Г ГҐГ¬ ГЄГ ГЄГ®Г©-ГІГ® ГЄГўГ Г¤Г°Г ГІГЁГЄ
+			tmp->next = tmp2; // Г±ГўГїГ§Г Г«ГЁ Г¤ГўГ  ГЄГўГ Г¤Г°Г ГІГ 
+			tmp = tmp2; // ГЇГҐГ°ГҐГёГ«ГЁ Г­Г  tmp2
 		}
 	}
+	
+	List( List& a) {
+    size = a.Size();
+    Node<int>* i = new Node<int>;
+    head = i;
+    Node<int>* k = a.head;
+    i->data = k->data;
+    while (k->next != NULL) {
+      this->insert(k->next->data, i);
+      k = k->next;
+      i = i->next;
+    }
+  }
+	
 	void insert(int data, Node* prev) {
-		Node* a = new Node; // создали квадратик а
-		a->data = data; // положили туда данные
-		Node* b = prev->next; // в b мы сохраняем адрес следующего
-		prev->next = a; // связываем с a
-		a->next = b; // a связываем со следующим
+		Node* a = new Node; // Г±Г®Г§Г¤Г Г«ГЁ ГЄГўГ Г¤Г°Г ГІГЁГЄ Г 
+		a->data = data; // ГЇГ®Г«Г®Г¦ГЁГ«ГЁ ГІГіГ¤Г  Г¤Г Г­Г­Г»ГҐ
+		Node* b = prev->next; // Гў b Г¬Г» Г±Г®ГµГ°Г Г­ГїГҐГ¬ Г Г¤Г°ГҐГ± Г±Г«ГҐГ¤ГіГѕГ№ГҐГЈГ®
+		prev->next = a; // Г±ГўГїГ§Г»ГўГ ГҐГ¬ Г± a
+		a->next = b; // a Г±ГўГїГ§Г»ГўГ ГҐГ¬ Г±Г® Г±Г«ГҐГ¤ГіГѕГ№ГЁГ¬
 	}
 	int Size() {
 		return size;
@@ -56,7 +70,7 @@ public:
 		}
 		size--;
 	}
-	int& Getelem(Node* i) { // без ссылки вернется копия
+	int& Getelem(Node* i) { // ГЎГҐГ§ Г±Г±Г»Г«ГЄГЁ ГўГҐГ°Г­ГҐГІГ±Гї ГЄГ®ГЇГЁГї
 		return i->data;
 	}
 	int search(int k) {
