@@ -65,7 +65,7 @@ TEST(List, medium)
 	EXPECT_EQ(st.medium(), 1);
 }
 
-// òåñòû íà èòåğàòîğ
+// Ã²Ã¥Ã±Ã²Ã» Ã­Ã  Ã¨Ã²Ã¥Ã°Ã Ã²Ã®Ã°
 
 TEST(Iterator, plus_plus_left)
 {
@@ -104,4 +104,14 @@ TEST(Iterator, neravno) {
 	Iterator i1 = NULL;
 	Iterator i2 = NULL;
 	EXPECT_TRUE(!(i1 != i2));
+}
+
+TEST(List, can_copy)
+{
+  List st(3);
+  for (Iterator it = st.begin(); it != st.end(); ++it) {
+    *it = 1;
+  }
+  List st2(st);
+  EXPECT_EQ(st.Head()->data, st2.Head()->data);
 }
