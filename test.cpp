@@ -13,7 +13,17 @@ TEST(List, can_get_size)
 	EXPECT_EQ(st.Size(), 3);
 }
 
-TEST(List, can_insert)
+TEST(List, can_copy)
+{
+	List st(3);
+	for (Iterator it = st.begin(); it != st.end(); ++it) {
+		*it = 1;
+	}
+	List st2(st);
+	EXPECT_EQ(st.Head()->data, st2.Head()->data);
+}
+
+TEST(List, can_insert1)
 {
 	List st(3);
 	for (Iterator it = st.begin(); it != st.end(); ++it) {
@@ -24,6 +34,17 @@ TEST(List, can_insert)
 	EXPECT_EQ(*(++itres), 2);
 }
 
+TEST(List, can_insert2)
+{
+	List st(3);
+	for (Iterator it = st.begin(); it != st.end(); ++it) {
+		*it = 1;
+	}
+	st.insert_front(5);
+	Iterator itres(st.Head());
+	EXPECT_EQ(*(itres), 5);
+}
+
 TEST(List, can_delete1)
 {
 	int i = 0;
@@ -32,7 +53,7 @@ TEST(List, can_delete1)
 		*it = i;
 		i++;
 	}
-	st.Delete(st.Head());
+	st.pop_front();
 	Iterator itres(st.Head());
 	EXPECT_EQ((*itres), 1);
 }
@@ -40,7 +61,7 @@ TEST(List, can_delete1)
 TEST(List, can_delete2)
 {
 	List st(3);
-	st.Delete(st.Head());
+	st.pop_front();
 	EXPECT_EQ(st.Size(), 2);
 }
 
@@ -65,7 +86,7 @@ TEST(List, medium)
 	EXPECT_EQ(st.medium(), 1);
 }
 
-// Ã²Ã¥Ã±Ã²Ã» Ã­Ã  Ã¨Ã²Ã¥Ã°Ã Ã²Ã®Ã°
+// òåñòû íà èòåğàòîğ
 
 TEST(Iterator, plus_plus_left)
 {
@@ -104,14 +125,4 @@ TEST(Iterator, neravno) {
 	Iterator i1 = NULL;
 	Iterator i2 = NULL;
 	EXPECT_TRUE(!(i1 != i2));
-}
-
-TEST(List, can_copy)
-{
-  List st(3);
-  for (Iterator it = st.begin(); it != st.end(); ++it) {
-    *it = 1;
-  }
-  List st2(st);
-  EXPECT_EQ(st.Head()->data, st2.Head()->data);
 }
